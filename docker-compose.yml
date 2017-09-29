@@ -3,14 +3,14 @@ version: "2"
 services:
   data:
     image: busybox
-    container_name: "laravel_data"
+    container_name: "laravel_api_data"
     volumes:
       - /data
       - /var/lib/mysql
 
   redis:
     image: redis:3.0.7
-    container_name: "laravel_redis"
+    container_name: "laravel_api_redis"
     ports:
       - "6379:6379"
     volumes_from:
@@ -18,7 +18,7 @@ services:
 
   mysql:
     image: mysql
-    container_name: "laravel_mysql"
+    container_name: "laravel_api_mysql"
     ports:
       - "3306:3306"
     env_file:
@@ -30,7 +30,7 @@ services:
 
   front:
     image: abiosoft/caddy
-    container_name: "laravel_caddy"
+    container_name: "laravel_api_caddy"
     environment:
       - CADDYPATH=/etc/caddycerts
     ports:
@@ -45,9 +45,9 @@ services:
       - app
 
   app:
-    image: laravel_skeleton:build
+    image: laravel_api_skeleton:build
     build: .
-    container_name: "laravel_app"
+    container_name: "laravel_api_app"
     volumes:
       - .:/app
     depends_on:
