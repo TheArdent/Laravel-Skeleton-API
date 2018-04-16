@@ -5,14 +5,14 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "barryvdh/laravel-ide-helper": "^2.4",
         "intervention/image": "^2.3",
-        "laravel/framework": "5.5.*",
-        "laravel/passport": "^2.0",
+        "laravel/framework": "5.6.*",
+        "laravel/passport": "~5.0",
         "laravel/tinker": "~1.0",
         "laravelrus/sleepingowl": "4.*@dev",
-        "nwidart/laravel-modules": "^1.24",
+        "nwidart/laravel-modules": "^3.0",
         "predis/predis": "^1.1",
         "santigarcor/laratrust": "4.0.*"
     },
@@ -43,14 +43,12 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan ide-helper:generate",
-            "php artisan ide-helper:meta",
-            "php artisan optimize"
+            "php artisan ide-helper:meta"
         ]
     },
     "config": {

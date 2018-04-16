@@ -27,10 +27,10 @@ services:
       - ./docker/mysql/newdb.sql:/docker-entrypoint-initdb.d/newdb.sql
     volumes_from:
       - data
-
+    
   front:
     image: abiosoft/caddy
-    container_name: "laravel_api_caddy"
+    container_name: "laravel_api_front"
     environment:
       - CADDYPATH=/etc/caddycerts
     ports:
@@ -39,8 +39,6 @@ services:
     volumes:
       - ./docker/caddy/Caddyfile:/etc/Caddyfile
       - ./docker/caddy/caddyssl:/etc/caddycerts
-    depends_on:
-      - app
     volumes_from:
       - app
 
