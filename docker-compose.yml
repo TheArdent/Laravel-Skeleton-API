@@ -1,59 +1,54 @@
-version: "3"
+version: "2"
 
 services:
-  # data:
-    # image: busybox
-    # container_name: "laravel_api_data"
-    # volumes:
-      # - /data
-      # - /var/lib/mysql
+  data:
+    image: busybox
+    container_name: "laravel_api_data"
+    volumes:
+      - /data
+      - /var/lib/mysql
 
-  # redis:
-    # image: redis:3.0.7
-    # container_name: "laravel_api_redis"
-    # ports:
-      # - "6379:6379"
-    # volumes_from:
-      # - data
+  redis:
+    image: redis:3.0.7
+    container_name: "laravel_api_redis"
+    ports:
+      - "6379:6379"
+    volumes_from:
+      - data
 
-  # mysql:
-    # image: mysql
-    # container_name: "laravel_api_mysql"
-    # ports:
-      # - "3306:3306"
-    # env_file:
-      # - ./docker/mysql/.env
-    # volumes:
-      # - ./docker/mysql/newdb.sql:/docker-entrypoint-initdb.d/newdb.sql
-    # volumes_from:
-      # - data
-
-  caddy:
+  mysql:
+    image: mysql
+    container_name: "laravel_api_mysql"
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./docker/mysql/.env
+    volumes:
+      - ./docker/mysql/newdb.sql:/docker-entrypoint-initdb.d/newdb.sql
+    volumes_from:
+      - data
+    
+  front:
     image: abiosoft/caddy
-    container_name: "caddy"
-    #environment:
-      #- CADDYPATH=/etc/caddycerts
+    container_name: "laravel_api_front"
+    environment:
+      - CADDYPATH=/etc/caddycerts
     ports:
       - "80:80"
       - "443:443"
-      - "2015:2015"
     volumes:
-      - ./docker/caddy/Caddyfile:/etc/MyCaddyfile
-    command: ["-conf", "/etc/MyCaddyfile", "-log=stdout"]
-      #- ./docker/caddy/caddyssl:/etc/caddycerts
-      #- .:/app
-    # depends_on:
-      # - app
-    # volumes_from:
-      # - app
+      - ./docker/caddy/Caddyfile:/etc/Caddyfile
+      - ./docker/caddy/caddyssl:/etc/caddycerts
+    volumes_from:
+      - app
 
-  # app:
-    # image: laravel_api_skeleton:build
-    # build: .
-    # container_name: "laravel_api_app"
-    # volumes:
-      # - .:/app
-    # depends_on:
-      # - mysql
-      # - redis
-    # command: /usr/local/sbin/php-fpm --allow-to-run-as-root
+  app:
+    image: laravel_api_skeleton:build
+    build: .
+    container_name: "laravel_api_app"
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+      - redis
+    command: /usr/local/sbin/php-fpm --allow-to-run-as-root
