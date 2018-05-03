@@ -1,4 +1,4 @@
-http://laravel.api {
+http://demo.local {
 	tls off
 	root /app/public
 	gzip
