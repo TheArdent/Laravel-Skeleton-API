@@ -3,6 +3,7 @@ FROM theparticles/libs:7.1
 COPY ./docker/php/fpm_www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/php/php.ini /usr/local/etc/php/
 
+
 ENV COMPOSER_HOME /composer
 ENV PATH /composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
