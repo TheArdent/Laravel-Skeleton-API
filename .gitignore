@@ -39,6 +39,7 @@ public/packages
 public/vendor
 
 public/static
+storage/logs
 storage/framework/cache/*
 storage/framework/views/*
 storage/framework/sessions/*
