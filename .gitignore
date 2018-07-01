@@ -12,7 +12,7 @@ vendor
 Homestead.json
 Homestead.yaml
 .phpstorm.meta.php
-.env
+/.env
 _ide_helper.php
 composer.lock
 npm-debug.log
