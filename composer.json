@@ -14,7 +14,8 @@
         "laravelrus/sleepingowl": "4.*@dev",
         "nwidart/laravel-modules": "^3.0",
         "predis/predis": "^1.1",
-        "santigarcor/laratrust": "4.0.*"
+        "santigarcor/laratrust": "4.0.*",
+        "spatie/laravel-http-logger": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
